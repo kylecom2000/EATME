@@ -1,0 +1,117 @@
+<h1>EAT ME!</h1>
+
+<ul>
+  {{#each burgers}}
+  <li>
+    <p>
+      {{this.id}}. {{this.burger_name}}
+
+      <button data-burgerid="{{this.id}}" class="delburger">Delete Burger!</button>
+    </p>
+  </li>
+  {{/each}}
+</ul>
+
+<h2>List a Burger to Eat</h2>
+<form id="createburger" class="button-size">
+  <textarea type="text" name="burger_name"></textarea>
+  <button type="submit">Save Burger!</button>
+</form>
+
+<h2>Update Burgers</h2>
+<form id="updateburgers" class="button-size">
+  <select name="id">
+		{{#each burgers}}
+			<option value="{{this.id}}">{{this.burger_name}}</option>
+		{{/each}}
+	</select>
+  <textarea type="text" name="burger_name" placeholder="New Burger Name"></textarea>
+  <button type="submit">Update Burger!</button>
+</form>
+
+<script type="text/javascript">
+    // DELETE BURGER SECTION
+    $(".delburger").on("click", function(event) {
+      // Get the ID from the button.
+      // This is shorthand for $(this).attr("data-planid")
+      var id = $(this).data("burgerid");
+
+      // Send the DELETE request.
+      $.ajax("/burgers/" + id, {
+        type: "DELETE"
+      }).then(
+        function() {
+          console.log("deleted id ", id);
+          // Reload the page to get the updated list
+          location.reload();
+        }
+      );
+    });
+
+    // CREATE BURGERS SECTION
+    $("#createburger").on("submit", function(event) {
+      // Make sure to preventDefault on a submit event.
+      event.preventDefault();
+
+      // [name=plan] will find an element with a "name" attribute equal to the string "plan"
+      var newBurger = {
+        burger: $("#createburger [name=burger_name]").val().trim()
+      };
+
+      // Send the POST request.
+      $.ajax("/burgers", {
+        type: "POST",
+        data: newBurger
+      }).then(
+        function() {
+          console.log("created new burger");
+          // Reload the page to get the updated list
+          location.reload();
+        }
+      );
+    });
+
+    // UPDATE BURGERS SECTION.
+    $("#updateburgers").on("submit", function(event) {
+      // Make sure to preventDefault on a submit event.
+      event.preventDefault();
+
+      var id = $("[name=id]").val().trim();
+      var updatedBurger = {
+        burger: $("#updateburgers [name=burger_name]").val().trim()
+      };
+
+      // Send the PUT request.
+      $.ajax("/burgers/" + id, {
+        type: "PUT",
+        data: updatedBurger
+      }).then(
+        function() {
+          console.log("updated id ", id);
+          // Reload the page to get the updated list
+          location.reload();
+        }
+      );
+    });
+
+    // DEVOUR BURGERS SECTION.
+    $("#devourburgers").on("submit", function(event) {
+      event.preventDefault();
+      var id = $("[name=id]").val().trim();
+      var updatedBurger = {
+        burger: $("#devourburgers [name=burger_name]").val().trim()
+      };
+
+      // Send the PUT request.
+      $.ajax("/burgers/devour/" + id, {
+        type: "PUT",
+        data: updatedBurger
+      }).then(
+        function() {
+          console.log("updated id ", id);
+          // Reload the page to get the updated list
+          location.reload();
+        }
+      );
+    });
+</script>
