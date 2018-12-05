@@ -45,9 +45,8 @@ app.get("/", function(req, res) {
     });
 });
 
-// Create a new todo
+// Create a new burger
 app.post("/burgers", function(req, res) {
-    console.log(req.body);
     connection.query("INSERT INTO burgers (burger_name, devoured) VALUES (?, ?)", [req.body.burger, false], function(err, result) {
         
         if (err) {
@@ -55,7 +54,6 @@ app.post("/burgers", function(req, res) {
         }
         // Send back the ID of the new burger
         res.json({ id: result.insertId });
-        console.log({ id: result.insertId });
     });
 });
 
@@ -77,6 +75,7 @@ app.put("/burgers/:id", function(req, res) {
 // TO DO Create a PUT request for DEVOUR. which changes the devoured to true.
 // Update a burger
 app.put("/burgers/devour/:id", function(req, res) {
+    console.log(req.params.id);
     connection.query("UPDATE burgers SET devoured = ? WHERE id = ?", [true, req.params.id], function(err, result) {
         if (err) {
             // Generic server failure

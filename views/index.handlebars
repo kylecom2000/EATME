@@ -7,6 +7,7 @@
       {{this.id}}. {{this.burger_name}}
 
       <button data-burgerid="{{this.id}}" class="delburger">Delete Burger!</button>
+      <button data-burgerid="{{this.id}}" class="devourburger">Devour Burger!</button>
     </p>
   </li>
   {{/each}}
@@ -33,7 +34,6 @@
     // DELETE BURGER SECTION
     $(".delburger").on("click", function(event) {
       // Get the ID from the button.
-      // This is shorthand for $(this).attr("data-planid")
       var id = $(this).data("burgerid");
 
       // Send the DELETE request.
@@ -95,17 +95,12 @@
     });
 
     // DEVOUR BURGERS SECTION.
-    $("#devourburgers").on("submit", function(event) {
+    $(".devourburger").on("click", function(event) {
       event.preventDefault();
-      var id = $("[name=id]").val().trim();
-      var updatedBurger = {
-        burger: $("#devourburgers [name=burger_name]").val().trim()
-      };
-
+      var id = $(this).data("burgerid");
       // Send the PUT request.
       $.ajax("/burgers/devour/" + id, {
-        type: "PUT",
-        data: updatedBurger
+        type: "PUT"
       }).then(
         function() {
           console.log("updated id ", id);
