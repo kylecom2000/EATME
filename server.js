@@ -14,14 +14,21 @@ var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
+
+
+
 // MySQL
 var mysql = require("mysql");
-var connection = mysql.createConnection({
-    host: "localhost",
-    port: 8889,
-    user: "root",
-    password: "root",
-    database: "burgers_db"
+let connection; 
+if (process.env.JAWSDB_URL) {
+    connection = mysql.createConnection(process.env.JAWSDB_URL);
+}
+    connection = mysql.createConnection({
+        host: "localhost",
+        port: 8889,
+        user: "root",
+        password: "root",
+        database: "burgers_db"
 });
 connection.connect(function(err) {
     if (err) {
@@ -30,6 +37,10 @@ connection.connect(function(err) {
     }
     console.log("connected as id " + connection.threadId);
 });
+// module.exports = connection;
+
+
+
 
 // Use Handlebars to render the main index.html page with the todos in it.
 app.get("/", function(req, res) {

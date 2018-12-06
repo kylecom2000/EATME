@@ -7,9 +7,14 @@
 --      * **burger_name**: a string.
 --      * **devoured**: a boolean.
 
+
+-- DONT USE ON JAWS DB
 DROP DATABASE IF EXISTS burgers_db;
 CREATE DATABASE burgers_db;
 USE burgers_db;
+
+
+
 
 CREATE TABLE burgers 
 (

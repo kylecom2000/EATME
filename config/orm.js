@@ -1,4 +1,4 @@
-// 3. Create an `orm.js` file inside `config` directory.
+const connections = require("./connection");
 
 //    * Import (require) `connection.js` into `orm.js`
 
