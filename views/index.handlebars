@@ -1,17 +1,45 @@
+
 <h1>EAT ME!</h1>
 
-<ul>
-  {{#each burgers}}
-  <li>
-    <p>
-      {{this.id}}. {{this.burger_name}}
+<div class="row">
+  <div class="col">
+  <h2>My Burger List</h2>
+    <ul>
+      {{#each burgers}}
+        {{#unless devoured}}
+          <li>
+            <p>
+              {{this.id}}. {{this.burger_name}}
+              <br>
+              <button data-burgerid="{{this.id}}" class="delburger">Delete</button>
+              <button data-burgerid="{{this.id}}" class="devourburger">Devour</button>
+            </p>
+          </li>
+        {{/unless}} 
+      {{/each}}
+    </ul>
+  </div>
 
-      <button data-burgerid="{{this.id}}" class="delburger">Delete Burger!</button>
-      <button data-burgerid="{{this.id}}" class="devourburger">Devour Burger!</button>
-    </p>
-  </li>
-  {{/each}}
-</ul>
+
+  <div class="col">
+    <h2>Devoured Burgers</h2>
+    <ul>
+      {{#each burgers}}
+        {{#if devoured}}
+          <li>
+            <p>
+              {{this.id}}. {{this.burger_name}}
+              <br>
+              <button data-burgerid="{{this.id}}" class="delburger">Delete</button>
+            </p>
+          </li>
+        {{!-- {{else}}
+          <h3>You haven't devoured any burgers yet!</h3> --}}
+        {{/if}}
+      {{/each}}
+    </ul>
+  </div>
+</div>
 
 <h2>List a Burger to Eat</h2>
 <form id="createburger" class="button-size">
@@ -21,92 +49,15 @@
 
 <h2>Update Burgers</h2>
 <form id="updateburgers" class="button-size">
+  
   <select name="id">
+    
 		{{#each burgers}}
 			<option value="{{this.id}}">{{this.burger_name}}</option>
 		{{/each}}
 	</select>
-  <textarea type="text" name="burger_name" placeholder="New Burger Name"></textarea>
+  <br>
+  <textarea type="text" name="update_burger" placeholder="New Burger Name"></textarea>
   <button type="submit">Update Burger!</button>
+  <br>
 </form>
-
-<script type="text/javascript">
-    // DELETE BURGER SECTION
-    $(".delburger").on("click", function(event) {
-      // Get the ID from the button.
-      var id = $(this).data("burgerid");
-
-      // Send the DELETE request.
-      $.ajax("/burgers/" + id, {
-        type: "DELETE"
-      }).then(
-        function() {
-          console.log("deleted id ", id);
-          // Reload the page to get the updated list
-          location.reload();
-        }
-      );
-    });
-
-    // CREATE BURGERS SECTION
-    $("#createburger").on("submit", function(event) {
-      // Make sure to preventDefault on a submit event.
-      event.preventDefault();
-
-      // [name=plan] will find an element with a "name" attribute equal to the string "plan"
-      var newBurger = {
-        burger: $("#createburger [name=burger_name]").val().trim()
-      };
-
-      // Send the POST request.
-      $.ajax("/burgers", {
-        type: "POST",
-        data: newBurger
-      }).then(
-        function() {
-          console.log("created new burger");
-          // Reload the page to get the updated list
-          location.reload();
-        }
-      );
-    });
-
-    // UPDATE BURGERS SECTION.
-    $("#updateburgers").on("submit", function(event) {
-      // Make sure to preventDefault on a submit event.
-      event.preventDefault();
-
-      var id = $("[name=id]").val().trim();
-      var updatedBurger = {
-        burger: $("#updateburgers [name=burger_name]").val().trim()
-      };
-
-      // Send the PUT request.
-      $.ajax("/burgers/" + id, {
-        type: "PUT",
-        data: updatedBurger
-      }).then(
-        function() {
-          console.log("updated id ", id);
-          // Reload the page to get the updated list
-          location.reload();
-        }
-      );
-    });
-
-    // DEVOUR BURGERS SECTION.
-    $(".devourburger").on("click", function(event) {
-      event.preventDefault();
-      var id = $(this).data("burgerid");
-      // Send the PUT request.
-      $.ajax("/burgers/devour/" + id, {
-        type: "PUT"
-      }).then(
-        function() {
-          console.log("updated id ", id);
-          // Reload the page to get the updated list
-          location.reload();
-        }
-      );
-    });
-</script>
