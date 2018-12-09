@@ -32,7 +32,11 @@ router.post("/api/burgers", function(req, res) {
 router.put("/api/burgers/:id", function(req, res) {
     let condition = "id = " + req.params.id;
     console.log("req.body", req.body);
-    burger.update(req.body
+    burger.update([
+        "burger_name"
+    ], [
+        req.body.burger_name
+    ]
     , condition, function(result){
         console.log("burger.update IN burger_controller.JS");
         if (result.changedRows == 0) {
@@ -48,9 +52,11 @@ router.put("/api/burgers/devour/:id", function(req, res) {
 
     console.log("Condition: " + condition);
 
-    burger.update({
-        devoured: 1
-    }, condition, function(result){
+    burger.update([
+        "devoured"
+    ], [
+        1
+    ], condition, function(result){
         console.log("burger.update IN burger_controller.JS");
         if (result.changedRows == 0) {
             return res.status(404).end();

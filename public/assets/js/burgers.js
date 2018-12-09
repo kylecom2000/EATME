@@ -48,7 +48,7 @@ $(function() {
       event.preventDefault();
       let id = $("[name=id]").val().trim();
       let updatedBurger = {
-        burger_name:  '"' + $("[name=update_burger]").val().trim() + '"'
+        burger_name: $("[name=update_burger]").val().trim()
       };
 
       console.log("updatedBurger", updatedBurger);

@@ -10,15 +10,16 @@ const burger = {
 
     create: function(cols, vals, cb) {
         console.log("create IN burger.JS");
+        console.log("create Cols Vals" , cols, vals);
         orm.create("burgers", cols, vals, function(res) {
             cb(res);
         });
     },
     
-    update: function(objColVals, condition, cb) {
+    update: function(cols, vals, condition, cb) {
         console.log("update IN burger.JS");
-        console.log("objColVals" ,objColVals);
-        orm.update("burgers", objColVals, condition, function(res) {
+        // console.log("objColVals" ,objColVals);
+        orm.update("burgers", cols, vals, condition, function(res) {
             cb(res);
         });
     },
