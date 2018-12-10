@@ -2,12 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link href="/assets/img/favicon.ico" rel="icon" type="image/x-icon" />
   <link rel="stylesheet" href="/assets/css/burger_styles.css" type="text/css" />
   <title>EAT ME!</title>
+  <!-- MATERIALIZE Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!-- MATERIALIZE Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  {{!-- jQuery for ajax and Document listening--}}
   <script src="https://code.jquery.com/jquery.js"></script>
+  {{!-- Document JS --}}
   <script src="/assets/js/burgers.js"></script>
 </head>
 <body>
-  {{{ body }}}
+  <div class="container">
+    {{{ body }}} 
+  </div>
 </body>
 </html>

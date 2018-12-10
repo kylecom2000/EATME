@@ -1,63 +1,88 @@
-
-<h1>EAT ME!</h1>
+<div class="row">
+  <div class="col topBun">
+    <img class="responsive-img" src="/assets/img/topBun.png" alt="BURGER">
+  </div>
+</div>
+<div class="row">
+  <div class="col onion">
+    <h1>EAT ME!</h1>
+    <h5>A Burger Tracker</h5>
+    <img class="responsive-img" src="/assets/img/meat.png" alt="BURGER">
+  </div>
+</div>
 
 <div class="row">
-  <div class="col">
-  <h2>My Burger List</h2>
-    <ul>
-      {{#each burgers}}
-        {{#unless devoured}}
-          <li>
-            <p>
-              {{this.id}}. {{this.burger_name}}
-              <br>
-              <button data-burgerid="{{this.id}}" class="delburger">Delete</button>
-              <button data-burgerid="{{this.id}}" class="devourburger">Devour</button>
-            </p>
-          </li>
-        {{/unless}} 
-      {{/each}}
-    </ul>
+  <div class="col lettuce">
+    <img class="responsive-img" src="/assets/img/cheese.png" alt="BURGER">
+    <h3>My Burger List</h3>
+      <ul>
+        {{#each burgers}}
+          {{#unless devoured}}
+            <li class="burger-item">
+              <p>
+                {{this.id}}. {{this.burger_name}}
+                <br>
+                <button data-burgerid="{{this.id}}" class="delburger">Delete</button>
+                <button data-burgerid="{{this.id}}" class="devourburger">Devour</button>
+              </p>
+            </li>
+          {{/unless}} 
+        {{/each}}
+      </ul>
   </div>
+</div>
 
-
-  <div class="col">
-    <h2>Devoured Burgers</h2>
+<div class="row">
+  <div class="col meat">
+    <img class="responsive-img" src="/assets/img/lettuce.png" alt="BURGER">
+    <h3>Devoured Burgers</h3>
     <ul>
       {{#each burgers}}
         {{#if devoured}}
-          <li>
+          <li class="burger-item devoured">
             <p>
               {{this.id}}. {{this.burger_name}}
               <br>
               <button data-burgerid="{{this.id}}" class="delburger">Delete</button>
             </p>
           </li>
-        {{!-- {{else}}
-          <h3>You haven't devoured any burgers yet!</h3> --}}
         {{/if}}
       {{/each}}
     </ul>
   </div>
 </div>
 
-<h2>List a Burger to Eat</h2>
-<form id="createburger" class="button-size">
-  <textarea type="text" name="burger_name"></textarea>
-  <button type="submit">Save Burger!</button>
-</form>
+<div class="row">
+  <div class="col cheese">
+    <img class="responsive-img" src="/assets/img/cheese.png" alt="BURGER">
+    <h3>List a Burger to Eat</h3>
+    <form id="createburger" class="button-size">
+      <textarea type="text" name="burger_name" placeholder="(Big Kahuna Burger)"></textarea>
+      <button type="submit">Save Burger!</button>
+    </form>
+  </div>
+</div>
 
-<h2>Update Burgers</h2>
-<form id="updateburgers" class="button-size">
-  
-  <select name="id">
-    
-		{{#each burgers}}
-			<option value="{{this.id}}">{{this.burger_name}}</option>
-		{{/each}}
-	</select>
-  <br>
-  <textarea type="text" name="update_burger" placeholder="New Burger Name"></textarea>
-  <button type="submit">Update Burger!</button>
-  <br>
-</form>
+<div class="row">
+  <div class="col meat">
+    <img class="responsive-img" src="/assets/img/meat.png" alt="BURGER">
+  </div> 
+</div>
+<div class="row">
+  <div class="col bottomBun">
+    <h3>Rename Burgers</h3>
+    <form id="updateburgers" class="button-size">
+      <select name="id">
+        {{#each burgers}}
+          <option value="{{this.id}}">{{this.burger_name}}</option>
+        {{/each}}
+      </select>
+      <br>
+      <textarea type="text" name="update_burger" placeholder="(New Burger Name)"></textarea>
+      <button type="submit">Update Burger!</button>
+      <br>
+    </form>
+   
+    <img class="responsive-img bottomBun" src="/assets/img/bottomBun.png" alt="BURGER">
+  </div>
+</div>

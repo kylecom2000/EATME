@@ -1,6 +1,6 @@
 # EATME
 ### A restaurant app that lets users input the names of burgers they'd like to eat.
-## [Deployed on Heroku](https://git.heroku.com/fast-headland-11738.git)
+## [Deployed on Heroku](https://boiling-falls-40354.herokuapp.com/)
 
 ### Overview
 * A burger logger with MySQL, Node, Express, Handlebars and a homemade ORM. 

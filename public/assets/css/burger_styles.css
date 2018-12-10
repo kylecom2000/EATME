@@ -1,0 +1,38 @@
+
+body {
+    background-color: black;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 15px;
+}
+
+
+
+.burger-item {
+    background-color: rgba(213, 133, 133, 0.852);
+}
+
+.devoured {
+    background-color: rgba(213, 133, 133, 0.475);
+    color: rgba(0, 0, 0, 0.475);
+}
+
+.topBun, .lettuce, .onion, .pickles, .tomato, .cheese, .meat, .bottomBun{
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.centered {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+select {
+    display: block !important;
+}
+
+textarea {
+    color:white;
+}
